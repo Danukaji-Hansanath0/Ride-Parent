@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="9ec93b5a-0e18-4715-b9a9-b38949b23c5a" name="ridedb@localhost Mapping">
+      <data-sources db="ddc4f6ad-c176-41d6-96a1-34d6c59fca45" ddl="d2fa5fe9-51f4-49bd-b02e-22ccf5afd1e8" />
+      <scope>
+        <node kind="database" negative="1" />
+      </scope>
+    </mapping>
+  </component>
+</project>

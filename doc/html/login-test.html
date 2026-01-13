@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Google OAuth Test (Keycloak Broker)</title>
+    <style>
+        body { font-family: system-ui, sans-serif; padding: 2rem; max-width: 800px; margin: 0 auto; }
+        .card { border: 1px solid #e0e0e0; border-radius: 8px; padding: 1.5rem; margin: 1rem 0; }
+        pre { background: #f8f9fa; padding: 1rem; overflow: auto; border-radius: 4px; }
+        .btn { background: #4285F4; color: white; border: none; padding: 0.75rem 1.5rem; font-size: 1rem; border-radius: 4px; cursor: pointer; }
+        .btn:hover { opacity: 0.9; }
+        .success { background: #e6f4ea; border-left: 4px solid #34a853; }
+        .error { background: #fce8e6; border-left: 4px solid #ea4335; }
+    </style>
+</head>
+<body>
+<h1>🧪 Google OAuth Test (Keycloak Broker)</h1>
+
+<div class="card">
+    <h3>🔐 OAuth Parameters Used</h3>
+    <pre id="params"></pre>
+</div>
+
+<button class="btn" id="loginBtn">➡️ Sign in with Google</button>
+
+<div id="result" class="card" style="display: none;"></div>
+
+<script>
+    // 🔑 Configuration — CORRECTED: no trailing spaces
+    const CONFIG = {
+        client_id: "536528299811-7epa2uj2t0tqtcv3cpfqpndnftarqsa8.apps.googleusercontent.com",
+        redirect_uri: "https://keycloak.orysone.com/auth/realms/user-authentication-realm/broker/google/endpoint", // ✅ NO trailing space
+        scope: "openid email profile",
+        response_type: "code"
+    };
+
+    // Generate secure state & nonce
+    const generateRandomString = (len = 16) =>
+        Array.from(crypto.getRandomValues(new Uint8Array(len)), b => b.toString(16).padStart(2, '0')).join('');
+
+    const state = btoa(JSON.stringify({
+        ts: Date.now(),
+        rnd: generateRandomString(6)
+    })).replace(/=/g, '');
+    const nonce = generateRandomString(16);
+
+    // 🔧 FIXED: Base URL has NO trailing spaces
+    const authUrl = new URL("https://accounts.google.com/o/oauth2/auth"); // ✅ Clean base URL
+    authUrl.searchParams.set("client_id", CONFIG.client_id);
+    authUrl.searchParams.set("redirect_uri", CONFIG.redirect_uri); // ✅ Clean redirect_uri
+    authUrl.searchParams.set("response_type", CONFIG.response_type);
+    authUrl.searchParams.set("scope", CONFIG.scope);
+    authUrl.searchParams.set("state", state);
+    authUrl.searchParams.set("nonce", nonce);
+    authUrl.searchParams.set("access_type", "offline");
+    authUrl.searchParams.set("prompt", "select_account");
+
+    // Display params
+    document.getElementById("params").textContent = JSON.stringify({
+        client_id: CONFIG.client_id,
+        redirect_uri: CONFIG.redirect_uri,
+        response_type: CONFIG.response_type,
+        scope: CONFIG.scope,
+        state: state,
+        nonce: nonce.substring(0, 8) + "…"  // cleaner display
+    }, null, 2);
+
+    // Login button
+    document.getElementById("loginBtn").onclick = () => {
+        console.log("✅ Redirecting to clean Google auth URL:", authUrl.toString());
+        window.location = authUrl.toString();
+    };
+
+    // On page load: check for callback
+    window.addEventListener("load", () => {
+        const url = new URL(window.location);
+        const code = url.searchParams.get("code");
+        const error = url.searchParams.get("error");
+        const errorDesc = url.searchParams.get("error_description");
+        const returnedState = url.searchParams.get("state");
+
+        const resultDiv = document.getElementById("result");
+
+        if (error) {
+            resultDiv.className = "card error";
+            resultDiv.innerHTML = `
+                <h3>❌ Google OAuth Error</h3>
+                <p><strong>Error:</strong> ${error}</p>
+                ${errorDesc ? `<p><strong>Description:</strong> ${errorDesc}</p>` : ''}
+                <p><em>💡 Tip: Ensure redirect_uri in Google Cloud Console matches <code>${CONFIG.redirect_uri}</code> exactly — no spaces, no extra slash.</em></p>
+            `;
+            resultDiv.style.display = "block";
+        } else if (code) {
+            try {
+                const decodedState = JSON.parse(atob(returnedState));
+                resultDiv.className = "card success";
+                resultDiv.innerHTML = `
+                    <h3>✅ Success! Code received.</h3>
+                    <p>Google returned an authorization code. Now Keycloak should exchange it for tokens.</p>
+                    <pre>${JSON.stringify({
+                    code: code.substring(0, 12) + "…",
+                    state: decodedState,
+                    redirect_uri: CONFIG.redirect_uri
+                }, null, 2)}</pre>
+                    <p>➡️ You should be redirected to Keycloak next — if not, your <code>redirect_uri</code> may still be misconfigured.</p>
+                `;
+                resultDiv.style.display = "block";
+            } catch (e) {
+                resultDiv.className = "card error";
+                resultDiv.innerHTML = `<h3>⚠️ Invalid state</h3><pre>${e.message}</pre>`;
+                resultDiv.style.display = "block";
+            }
+        }
+    });
+</script>
+</body>
+</html>

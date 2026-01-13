@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/booking-service/src/main/java/com/ride/bookingservice/exception/ErrorResponse.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/booking-service/src/main/java/com/ride/bookingservice/exception/ErrorResponse.java" />
+              <option name="originalContent" value="package com.ride.bookingservice.exception;&#10;&#10;import lombok.*;&#10;&#10;import java.time.LocalDateTime;&#10;import java.util.Map;&#10;&#10;@Getter&#10;@Setter&#10;@NoArgsConstructor&#10;@AllArgsConstructor&#10;@Builder&#10;public class ErrorResponse {&#10;    private LocalDateTime timestamp;&#10;    private int status;&#10;    private String error;&#10;    private String message;&#10;    private String path;&#10;    private Map&lt;String, String&gt; validationErrors;&#10;}" />
+              <option name="updatedContent" value="package com.ride.bookingservice.exception;&#10;&#10;import lombok.*;&#10;&#10;import java.time.LocalDateTime;&#10;import java.util.Map;&#10;&#10;@Getter&#10;@Setter&#10;@NoArgsConstructor&#10;@AllArgsConstructor&#10;@Builder&#10;public class ErrorResponse {&#10;    private LocalDateTime timestamp;&#10;    private int status;&#10;    private String error;&#10;    private String message;&#10;    private String path;&#10;    private Map&lt;String, String&gt; validationErrors;&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
