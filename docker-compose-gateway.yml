@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  discovery-service:
+    image: rydeflexi/discovery-service:1.0.0
+    container_name: discovery-service
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SERVER_PORT=8761
+      - EUREKA_USERNAME=admin
+      - EUREKA_PASSWORD=admin123
+      - EUREKA_INSTANCE_HOSTNAME=discovery-service
+    networks:
+      - ride-network
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8761/actuator/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  gateway-service:
+    image: rydeflexi/gateway-service:1.0.0
+    container_name: gateway-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SERVER_PORT=8080
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE=http://admin:admin123@discovery-service:8761/eureka
+      - EUREKA_INSTANCE_HOSTNAME=gateway-service
+      - SERVICE_AUTH_ISSUER_URI=https://auth.rydeflexi.com/realms/service-authentication
+      - SERVICE_AUTH_JWKS_URI=https://auth.rydeflexi.com/realms/service-authentication/protocol/openid-connect/certs
+      - SERVICE_AUTH_TOKEN_URI=https://auth.rydeflexi.com/realms/service-authentication/protocol/openid-connect/token
+      - LOGGING_LEVEL_ROOT=INFO
+      - LOGGING_LEVEL_RIDE_SERVICES=DEBUG
+    networks:
+      - ride-network
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  ride-network:
+    driver: bridge

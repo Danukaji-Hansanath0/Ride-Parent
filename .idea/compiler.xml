@@ -8,26 +8,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
       </profile>
-      <profile name="Annotation profile for auth-service" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.6.3/mapstruct-processor-1.6.3.jar" />
-        </processorPath>
-        <module name="auth-service" />
-      </profile>
-      <profile name="Annotation profile for booking-service" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.6.3/mapstruct-processor-1.6.3.jar" />
-        </processorPath>
-        <module name="booking-service" />
-      </profile>
       <profile name="Annotation profile for mail-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -37,6 +17,16 @@
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.6.3/mapstruct-processor-1.6.3.jar" />
         </processorPath>
         <module name="mail-service" />
+      </profile>
+      <profile name="Annotation profile for owner-bff" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.6.3/mapstruct-processor-1.6.3.jar" />
+        </processorPath>
+        <module name="owner-bff" />
       </profile>
       <profile name="Annotation profile for payment-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -78,6 +68,28 @@
         </processorPath>
         <module name="vehicle-service" />
       </profile>
+      <profile name="Annotation profile for client-bff" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.6.3/mapstruct-processor-1.6.3.jar" />
+        </processorPath>
+        <module name="client-bff" />
+      </profile>
+      <profile name="Annotation profile for Discovery Service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.6.3/mapstruct-processor-1.6.3.jar" />
+        </processorPath>
+        <module name="discovery-service" />
+        <module name="admin-bff" />
+        <module name="booking-service" />
+      </profile>
       <profile name="Annotation profile for Ride Microservices Platform" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -90,13 +102,20 @@
         <module name="gateway-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="auth-service" target="21" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="admin-bff" options="-parameters -parameters -Xlint:unchecked -Xlint:deprecation" />
       <module name="auth-service" options="-parameters -parameters -Xlint:unchecked -Xlint:deprecation" />
       <module name="booking-service" options="-parameters -parameters -Xlint:unchecked -Xlint:deprecation" />
+      <module name="client-bff" options="-parameters -parameters -Xlint:unchecked -Xlint:deprecation" />
+      <module name="discovery-service" options="-parameters -parameters -Xlint:unchecked -Xlint:deprecation" />
       <module name="gateway-service" options="-parameters -parameters -Xlint:unchecked -Xlint:deprecation" />
       <module name="mail-service" options="-parameters -parameters -Xlint:unchecked -Xlint:deprecation" />
+      <module name="owner-bff" options="-parameters -parameters -Xlint:unchecked -Xlint:deprecation" />
       <module name="payment-service" options="-parameters -parameters -Xlint:unchecked -Xlint:deprecation" />
       <module name="pricing-service" options="-parameters -parameters -Xlint:unchecked -Xlint:deprecation" />
       <module name="user-service" options="-parameters -parameters -Xlint:unchecked -Xlint:deprecation" />

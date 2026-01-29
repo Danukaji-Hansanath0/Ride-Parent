@@ -2,11 +2,14 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/admin-bff" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/auth-service" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/booking-service" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/discovery-service" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/gateway-service" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/k8s" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/mail-service" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/owner-bff" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/payment-service" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/pricing-service" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/user-service" vcs="Git" />

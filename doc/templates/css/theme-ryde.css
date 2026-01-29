@@ -1,0 +1,36 @@
+/* css/theme-ryde.css */
+/* Brand layer: change these to match Ryde branding */
+
+:root {
+    --ryde: #2563eb;     /* primary */
+    --ryde-2: #0ea5e9;   /* accent */
+    --ink: #0f172a;
+}
+
+.logo {
+    background: linear-gradient(135deg, var(--ryde), var(--ryde-2));
+}
+
+.btn-primary {
+    background: var(--ryde);
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.btn-ghost {
+    background: #ffffff;
+    color: var(--ink) !important;
+    border-color: #e6ebf6;
+}
+
+.badge-success {
+    background: #ecfdf5;
+    border-color: #a7f3d0;
+    color: #065f46;
+}
+
+.badge-warn {
+    background: #fff7ed;
+    border-color: #fed7aa;
+    color: #9a3412;
+}

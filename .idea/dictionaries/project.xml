@@ -2,7 +2,12 @@
   <dictionary name="project">
     <words>
       <w>authz</w>
+      <w>carapi</w>
+      <w>circuitbreaker</w>
+      <w>dtos</w>
+      <w>kafka</w>
       <w>resourceserver</w>
+      <w>uris</w>
     </words>
   </dictionary>
 </component>

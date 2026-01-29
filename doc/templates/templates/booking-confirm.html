@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Booking Confirmed • {{app_name}}</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/theme-ryde.css">
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="header">
+            <div class="brand-row">
+                <span class="logo" aria-hidden="true"></span>
+                <div class="brand-name">{{app_name}}</div>
+            </div>
+        </div>
+
+        <div class="body">
+            <div class="badge badge-success">Booking confirmed</div>
+            <h1 class="h1">You’re locked in. 🚗</h1>
+            <p class="p">Here are your booking details. Keep this email for reference.</p>
+
+            <table class="kv" role="presentation">
+                <tr><td>Booking ID</td><td>{{booking_id}}</td></tr>
+                <tr><td>Vehicle</td><td>{{vehicle}}</td></tr>
+                <tr><td>Date</td><td>{{date_range}}</td></tr>
+                <tr><td>Pickup</td><td>{{pickup}}</td></tr>
+                <tr><td>Dropoff</td><td>{{dropoff}}</td></tr>
+            </table>
+
+            <div class="button-wrap">
+                <a class="btn btn-primary" href="{{cta_url}}" target="_blank" rel="noopener">View booking</a>
+                <span>&nbsp;</span>
+                <a class="btn btn-ghost" href="{{manage_url}}" target="_blank" rel="noopener">Manage</a>
+            </div>
+
+            <div class="hr"></div>
+
+            <p class="p muted">
+                Questions? Email <a href="mailto:{{support_email}}">{{support_email}}</a>.
+            </p>
+        </div>
+
+        <div class="footer">
+            <div class="muted">© {{year}} {{app_name}}.</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

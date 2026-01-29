@@ -1,0 +1,73 @@
+server:
+  port: ${CLIENT_BFF_PORT:8089}
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: client-bff
+
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+
+  web:
+    resources:
+      add-mappings: ${SPRING_WEB_RESOURCES_ADD_MAPPINGS:true}
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: ${SPRING_JACKSON_SERIALIZATION_WRITE_DATES_AS_TIMESTAMPS:false}
+      fail-on-empty-beans: ${SPRING_JACKSON_SERIALIZATION_FAIL_ON_EMPTY_BEANS:false}
+
+  liquibase:
+    enabled: ${SPRING_LIQUIBASE_ENABLED:false}
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${USER_AUTH_ISSUER_URI:https://auth.rydeflexi.com/realms/user-authentication}
+
+logging:
+  level:
+    root: ${LOGGING_LEVEL_ROOT:INFO}
+    com.ride: ${LOGGING_LEVEL_RIDE_SERVICES:DEBUG}
+    org.springframework.security: ${LOGGING_LEVEL_SPRING_SECURITY:INFO}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE:http://localhost:8761/eureka}
+    register-with-eureka: ${EUREKA_CLIENT_REGISTER_WITH_EUREKA:true}
+    fetch-registry: ${EUREKA_CLIENT_FETCH_REGISTRY:true}
+  instance:
+    prefer-ip-address: ${EUREKA_INSTANCE_PREFER_IP_ADDRESS:false}
+    hostname: ${EUREKA_INSTANCE_HOSTNAME:localhost}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ${MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE:health,info,metrics,prometheus}
+  endpoint:
+    health:
+      show-details: ${MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS:when-authorized}
+  metrics:
+    enabled: ${METRICS_ENABLED:true}
+
+springdoc:
+  api-docs:
+    enabled: ${SPRINGDOC_API_DOCS_ENABLED:true}
+    path: ${SPRINGDOC_API_DOCS_PATH:/v3/api-docs}
+  swagger-ui:
+    enabled: ${SPRINGDOC_SWAGGER_UI_ENABLED:true}
+    path: ${SPRINGDOC_SWAGGER_UI_PATH:/swagger-ui.html}
+    operations-sorter: ${SPRINGDOC_SWAGGER_UI_OPERATIONS_SORTER:method}
+    tags-sorter: ${SPRINGDOC_SWAGGER_UI_TAGS_SORTER:alpha}
+    try-it-out-enabled: ${SPRINGDOC_SWAGGER_UI_TRY_IT_OUT_ENABLED:true}
+
+services:
+  vehicle-service-url: ${VEHICLE_SERVICE_URL:http://vehicle-service:8087}
+  pricing-service-url: ${PRICING_SERVICE_URL:http://pricing-service:8085}
+  booking-service-url: ${BOOKING_SERVICE_URL:http://booking-service:8082}
+  user-service-url: ${USER_SERVICE_URL:http://user-service:8086}
