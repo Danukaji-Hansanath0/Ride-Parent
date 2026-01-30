@@ -19,7 +19,7 @@ import java.util.List;
  * Powered by Elasticsearch for fast, scalable search with pricing integration.
  */
 @RestController
-@RequestMapping("api/v1/search/advanced")
+@RequestMapping("/api/v1/client/search/advanced")
 @RequiredArgsConstructor
 @Slf4j
 public class AdvancedVehicleSearchController {

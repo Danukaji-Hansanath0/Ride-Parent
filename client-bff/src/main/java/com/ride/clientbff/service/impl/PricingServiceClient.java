@@ -47,7 +47,7 @@ public class PricingServiceClient implements IPricingServiceClient {
                     log.debug("Access token obtained for pricing service");
 
                     return pricingServiceWebClient.get()
-                            .uri("/api/v1/prices/{vehicleId}", ownerHasVehicleId)
+                            .uri("/api/v1/pricing/prices/{vehicleId}", ownerHasVehicleId)
                             .headers(headers -> headers.setBearerAuth(token))
                             .accept(MediaType.APPLICATION_JSON)
                             .retrieve()

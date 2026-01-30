@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * Provides endpoints for clients to search for available vehicles.
  */
 @RestController
-@RequestMapping("api/v1/search")
+@RequestMapping("/api/v1/client/search")
 @RequiredArgsConstructor
 @Slf4j
 public class VehicleSearchController {

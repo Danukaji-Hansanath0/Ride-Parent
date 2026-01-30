@@ -33,7 +33,7 @@ public class PricingServiceClient {
             log.debug("Fetching pricing for ownerHasVehicleId: {}", ownerHasVehicleId);
 
             return webClient.get()
-                    .uri(pricingServiceUrl + "/api/v1/pricing/{id}", ownerHasVehicleId)
+                    .uri(pricingServiceUrl + "/api/v1/pricing/prices/{id}", ownerHasVehicleId)
                     .retrieve()
                     .bodyToMono(PricingDto.class)
                     .doOnError(e -> log.error("Failed to fetch pricing: {}", e.getMessage()))
