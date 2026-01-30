@@ -254,7 +254,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://admin:admin123@localhost:8761/eureka/
     register-with-eureka: true
     fetch-registry: true
   instance:
@@ -264,7 +264,7 @@ eureka:
 
 ### Environment Variables (.env)
 ```bash
-EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE=http://localhost:8761/eureka
+EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE=http://admin:admin123@localhost:8761/eureka/
 EUREKA_CLIENT_REGISTER_WITH_EUREKA=true
 EUREKA_CLIENT_FETCH_REGISTRY=true
 EUREKA_INSTANCE_HOSTNAME=localhost
@@ -284,13 +284,13 @@ You should see all services listed as "UP"
 ### Check Service Status via REST
 ```bash
 # Get all registered services
-curl http://localhost:8761/eureka/apps
+curl -u admin:admin123 http://localhost:8761/eureka/apps
 
 # Get specific service
-curl http://localhost:8761/eureka/apps/auth-service
+curl -u admin:admin123 http://localhost:8761/eureka/apps/auth-service
 
 # Check service instance
-curl http://localhost:8761/eureka/apps/user-service/instances/user-service:8086
+curl -u admin:admin123 http://localhost:8761/eureka/apps/user-service/instances/user-service:8086
 ```
 
 ### Check Service Health
@@ -421,4 +421,3 @@ All services can now:
 **Deployment Date:** January 22, 2026
 **Configuration:** Netflix Eureka (Spring Cloud)
 **Version:** 2025.0.0 (Spring Cloud)
-

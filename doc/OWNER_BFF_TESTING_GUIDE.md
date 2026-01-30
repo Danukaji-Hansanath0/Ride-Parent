@@ -506,7 +506,7 @@ VEHICLE_DATASOURCE_URL=jdbc:postgresql://localhost:5437/vehicledb
 PRICING_DATASOURCE_URL=jdbc:postgresql://localhost:5435/pricingdb
 
 # Service Discovery
-EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE=http://localhost:8761/eureka
+EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE=http://admin:admin123@localhost:8761/eureka/
 ```
 
 ---
@@ -518,4 +518,3 @@ For issues with:
 - **Vehicle Service:** Check vehicle-service logs
 - **Pricing Service:** Check pricing-service logs
 - **Network:** Check if services are registered in Eureka (http://localhost:8761)
-
